@@ -1,5 +1,5 @@
-Git_commands.aux
-Git_commands.log
-Git_commands.out
-Git_commands.pdf
-Git_commands.synctex.gz
+*.aux
+*.log
+*.out
+*.pdf
+*.gz

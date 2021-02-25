@@ -151,14 +151,18 @@ Dove COMMITREF può essere:
 \item master
 \item il nome di un altro branch (ciò fa sì che ci si sposta alla fine di quel branch)
 \end{itemize}
-Si può addirittura recuperare le modifiche fatte in un certo commit solo per alcuni file a mia scelta:
-\\\\
-\textbf{git checkout COMMITREF -{}- FILENAME}
-\\\\
 A quel punto si è in una modalità chiamata Detached Head (testa staccata). Ogni commit fatto in quel punto verrà scartato. Per tornare in modalità attached bisogna tornare alla HEAD del branch:
 \\\\
 \centerline{es. git checkout master}
-
+\\\\
+Con il comando checkout si possono anche recuperare le modifiche solo per alcuni file a mia scelta fatte in un certo commit:
+\\\\
+\textbf{git checkout COMMITREF -{}- FILENAME}
+\\\\
+Se per esempio voglio ripristinare lo stato del solo file pippo.txt allo stato che aveva 2 commit fa:
+\\\\
+\centerline{git checkout HEAD$\sim$2 -{}- /pippo.txt}
+\\\\
 \chapter{Creare un nuovo branch e unire due branch}
 Il sottocomando checkout consente anche di creare un nuovo branch e di spostarcisi automaticamente:
 \\\\

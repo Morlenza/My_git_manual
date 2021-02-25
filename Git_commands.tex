@@ -110,7 +110,11 @@ Per visualizzare tutti i commit della linea di sviluppo corrente:
 \\\\
 Per visualizzare tutti i commit della linea di sviluppo corrente ma con una visualizzazione grafica:
 \\\\
-\textbf{git log --graph}
+\textbf{git log -{}-graph}
+\\\\
+Per visualizzare tutti i commit di tutti i branch con una visualizzazione grafica:
+\\\\
+\textbf{git log -{}-all -{}-graph}
 
 \chapter{Navigare nel repository}
 Se vogliamo vedere le modifiche intercorse fra due commit usiamo il comando diff. Per riferirci ad un commit usiamo il suo codice hash (bastano le prime 7 cifre. Per ottenerlo cercarlo nello storico con git log)
@@ -155,17 +159,34 @@ A quel punto si è in una modalità chiamata Detached Head (testa staccata). Ogn
 \\\\
 \centerline{es. git checkout master}
 
-\chapter{Creare un nuovo branch}
+\chapter{Creare un nuovo branch e unire due branch}
 Il sottocomando checkout consente anche di creare un nuovo branch e di spostarcisi automaticamente:
 \\\\
 \textbf{git checkout -b NEWBRANCHNAME}
 \\\\
 I commit seguenti saranno perciò aggiunti al nuovo branch.
-
-La HEAD identifica la posizione corrente all'interno della storia del repository. In una normale sessione la HEAD è posizionata alla fine del branch.
-Introduciamo il concetto di fusione di due branch. Il comando per ottenere ciò è:
+\\
+Per visualizzare tutti i branch lanciare:
 \\\\
-\textbf{git }
+\textbf{git branch}
+\\\\
+La HEAD identifica la posizione corrente all'interno della storia del repository. In una normale sessione la HEAD è posizionata alla fine del branch.
+Introduciamo il concetto di fusione di due branch. Il comando per ottenere ciò è merge.
 
+Bisogna prima spostarsi sul branch in cui voler introdurre le modifiche e poi usare il comando:
+\\\\
+\textbf{git merge BRANCHNAME}
+\\\\
+Dove BRANCHNAME è il nome del branch che si vuole unire al branch su cui si è attualmente
+
+Se non ci sono conflitti tutti i commit di BRANCHNAME vengono aggiunti al branch corrente.
+
+Viene creato un nuovo commit di default (che è buona norma non modificare) con l'editor di default.
+\\\\
+Eventualmente si può ora cancellare il branch "secondario" con:
+\\\\
+\textbf{git branch -d BRANCHNAME}
+\\\\
+Attenzione: viene cancellata solo l'associazione del nome a quel branch. Nello storico il branch è ancora visibile. Ora possiamo dare lo stesso nome ad un nuovo branch.
 
 \end{document}

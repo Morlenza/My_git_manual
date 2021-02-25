@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage{alltt, fancyvrb, url}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+% Questo commentalo se vuoi scrivere in inglese.
+\usepackage[italian]{babel}
+
+\usepackage[italian]{cleveref}
+
+\title{Guida rapida per i comandi Git}
+
+\author{Luca Morlino}
+\date{\today}
+\begin{document}
+
+\maketitle
+
+
+\chapter{Operazioni preliminari}
+\begin{itemize}
+\item Per impostare un nome utente di default : \\\\
+\textbf{git config -{}-global\footnote{il flag -{}-global setta le impostazioni non per il repository corrente ma per qualunque nuovo repository} user.name "YOUR NAME"} \\
+\centerline{es. git config -{}-global user.name "JOHN SMITH"}
+%
+\item Per specificare una mail di default:\\\\
+\textbf{git config -{}-global user.mail "your.email@provider"} \\
+\centerline{es. git config -{}-global user.email johnsmith@example.com}
+%
+\item Impostazione carattere di new line: \\\\
+Dato l'uso di diversi sistemi operativi bisogna configurare git affinchè non reinterpreti il fine linea. Il fine linea va settato sull'IDE (Text File Encoding:UTF-8; New Text File Line Delimiter: Unix) mentre su git va disattivato.\\\\
+\centerline{Per utenti Unix e Mac-OS:}\\\\
+\textbf{git config -{}-global core.autocrlf input}\\\\
+\centerline{Per utenti Windows:}\\\\
+\textbf{git config -{}-global core.autocrlf false}
+\end{itemize}
+
+\chapter{Primi passi: creare un repository e fare un commit}
+Spostarsi sulla cartella dove si vuole creare il repository e con il comando
+\\\\
+\textbf{git init}
+\\\\
+verrà creata una cartella .git (inizia con il punto poichè su Unix tali cartelle sono nascoste).
+\\\\
+Verificare di essere sul branch master con il comando
+\\\\
+\textbf{git status}
+\\\\
+Cosa \textbf{VA} tracciato con git:
+\begin{itemize}
+\item Sorgenti
+\item Risorse
+\item Librerie
+\item File esterni quali README.md, file per la licenza, il file .project per facilitare un lavoro di un team che utilizza Eclipse
+\end{itemize}
+Cosa \textbf{NON VA}  tracciato con git:
+\begin{itemize}
+\item Binari
+\item Documentazione rigenerabile dai sorgenti
+\item Archivi rigenerabili 
+\end{itemize}
+Per non tracciare file e/o cartelle creare il file .gitignore con all'interno un elenco:
+\\\\
+bin/
+\\
+doc/
+\\
+*.log
+\\
+*.pdf
+\\\\
+Per aggiungere le modifiche fatte su un file (compresa la cancellazione del file stesso) allo staging area lanciare:
+\\\\
+\textbf{git add PATH\textunderscore TO\textunderscore FILE}
+\\\\
+Nel caso di più file:
+\\\\
+\textbf{git add PATH\textunderscore TO\textunderscore FILE\textunderscore 1 PATH\textunderscore TO\textunderscore FILE\textunderscore 2 PATH\textunderscore TO\textunderscore FILE\textunderscore 3}
+\\\\
+Se ci si accorge di avere fatto un errore e di voler togliere uno o più file dallo stage usare il comando:
+\\\\
+\textbf{git reset PATH\textunderscore TO\textunderscore FILE}
+\\\\
+Nel caso di più file:
+\\\\
+\textbf{git reset PATH\textunderscore TO\textunderscore FILE\textunderscore 1 PATH\textunderscore TO\textunderscore FILE\textunderscore 2 PATH\textunderscore TO\textunderscore FILE\textunderscore 3}
+\\\\
+Una volta messo il file sulla staging area si potrà fare il commit:
+\\\\
+\textbf{git commit -m "QUI INSERIRE IL TESTO DEL COMMIT"}
+\\\\
+Riverificare lo stato del repository:
+\\\\
+\textbf{git status}
+\\\\
+\textbf{GOOD PRACTICES}:
+\begin{itemize}
+\item Molti commit
+\item Piccola dimensione
+\item Messaggio breve ma significativo
+\item Verificare continuamente lo stato del repository
+\end{itemize}
+\textbf{Come visualizzare la storia dei commit}:
+\\\\
+Per visualizzare tutti i commit della linea di sviluppo corrente:
+\\\\
+\textbf{git log}
+\\\\
+Per visualizzare tutti i commit della linea di sviluppo corrente ma con una visualizzazione grafica:
+\\\\
+\textbf{git log --graph}
+
+\chapter{Navigare nel repository}
+Se vogliamo vedere le modifiche intercorse fra due commit usiamo il comando diff.
+\\\\
+Per mostrare le differenze fra il working tree e l'ultimo commit:
+\\\\
+\textbf{git diff}
+\\\\
+Per mostrare le differenze fra il working tree e un commit specifico:
+\\\\
+\textbf{git diff FROM}
+\\\\
+Per mostrare le differenze fra due commit specifici:
+\\\\
+\textbf{git diff FROM TO}
+\\\\
+La HEAD identifica la posizione corrente all'interno della storia del repository. In una normale sessione la HEAD è posizionata alla fine del branch.
+Introduciamo il concetto di fusione di due branch. Il comando per ottenere ciò è:
+\\\\
+\textbf{git }
+
+
+\end{document}

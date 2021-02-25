@@ -113,7 +113,7 @@ Per visualizzare tutti i commit della linea di sviluppo corrente ma con una visu
 \textbf{git log --graph}
 
 \chapter{Navigare nel repository}
-Se vogliamo vedere le modifiche intercorse fra due commit usiamo il comando diff.
+Se vogliamo vedere le modifiche intercorse fra due commit usiamo il comando diff. Per riferirci ad un commit usiamo il suo codice hash (bastano le prime 7 cifre. Per ottenerlo cercarlo nello storico con git log)
 \\\\
 Per mostrare le differenze fra il working tree e l'ultimo commit:
 \\\\
@@ -123,10 +123,45 @@ Per mostrare le differenze fra il working tree e un commit specifico:
 \\\\
 \textbf{git diff FROM}
 \\\\
+\centerline{es. git diff 07388467}
+\\\\
 Per mostrare le differenze fra due commit specifici:
 \\\\
 \textbf{git diff FROM TO}
 \\\\
+\centerline{es. git diff 0738847 7736421}
+\\\\
+Per semplificare l'accesso agli ultimi commit possiamo riferirci ad essi usando HEAD $\sim$N dove N è il numero quanti  commit vogliamo spostarci all'indietro. Per esempio se vogliamo spostarci indietro di 3 commit lanciamo il comando:
+\\\\
+\textbf{git diff HEAD$\sim$3}
+\\\\
+Per spostarsi invece fisicamente su di un commit si usa il comando checkout:
+\\\\
+\textbf{git checkout COMMITREF}
+\\\\
+Dove COMMITREF può essere:
+\begin{itemize}
+\item L'hash completo di un commit
+\item Almeno le prime 7 cifre di un commit
+\item HEAD$\sim$2
+\item master
+\item il nome di un altro branch (ciò fa sì che ci si sposta alla fine di quel branch)
+\end{itemize}
+Si può addirittura recuperare le modifiche fatte in un certo commit solo per alcuni file a mia scelta:
+\\\\
+\textbf{git checkout COMMITREF -{}- FILENAME}
+\\\\
+A quel punto si è in una modalità chiamata Detached Head (testa staccata). Ogni commit fatto in quel punto verrà scartato. Per tornare in modalità attached bisogna tornare alla HEAD del branch:
+\\\\
+\centerline{es. git checkout master}
+
+\chapter{Creare un nuovo branch}
+Il sottocomando checkout consente anche di creare un nuovo branch e di spostarcisi automaticamente:
+\\\\
+\textbf{git checkout -b NEWBRANCHNAME}
+\\\\
+I commit seguenti saranno perciò aggiunti al nuovo branch.
+
 La HEAD identifica la posizione corrente all'interno della storia del repository. In una normale sessione la HEAD è posizionata alla fine del branch.
 Introduciamo il concetto di fusione di due branch. Il comando per ottenere ciò è:
 \\\\

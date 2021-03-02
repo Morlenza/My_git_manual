@@ -164,7 +164,7 @@ Se per esempio voglio ripristinare lo stato del solo file pippo.txt allo stato c
 \centerline{git checkout HEAD$\sim$2 -{}- /pippo.txt}
 \\\\
 \chapter{Creare un nuovo branch e unire due branch}
-Il sottocomando checkout consente anche di creare un nuovo branch e di spostarcisi automaticamente:
+Il sottocomando checkout consente anche di creare un nuovo branch dal punto in cui ci si trova e di spostarcisi automaticamente:
 \\\\
 \textbf{git checkout -b NEWBRANCHNAME}
 \\\\
@@ -192,5 +192,103 @@ Eventualmente si può ora cancellare il branch "secondario" con:
 \textbf{git branch -d BRANCHNAME}
 \\\\
 Attenzione: viene cancellata solo l'associazione del nome a quel branch. Nello storico il branch è ancora visibile. Ora possiamo dare lo stesso nome ad un nuovo branch.
+\\\\
+\section{Risolvere i merge conflict}
+Nel caso in cui due linee di sviluppo abbiano modificato concorrentemente un file nello stesso punto, il merge non è banale da effettuare ma occorre risolvere manualmente un merge conflict.
+Una volta modificati i file che confliggono occorre aggiungerli allo stage e poi fare il commit (il commit di default viene auto-generato).
+\\\\
+\textbf{Ricordarsi di tracciare le cose corrette. Non i file rigenerabili, in quanto provocano merge conflict difficili da risolvere.}
 
+
+\chapter{Git in rete}
+
+\section{Clonare un repository}
+Per importare una copia di un repository esistente lanciare il comando:
+\\\\
+\textbf{git clone URI localfolder}
+\\\\
+Il comando scarica l'intera storia del repository conservato in URI all'interno di localfolder(che deve essere vuoto) che diventa un nuovo repository Git. Se localfolder non viene segnalato allora Git crea una cartella con l'ultimo nome del path.
+\section{Repository remoto}
+E' utile ricordare un indirizzo con un nome simbolico. 
+Per conoscere i repository remoti configurati usare il comando:
+\\\\
+\textbf{git remote -v}
+\\\\
+Per aggiungerne uno nuovo:
+\\\\
+\textbf{git remote add name url}
+\\\\
+\centerline{es. git remote add serverAziendale www.github.com/pippo/repo}
+\\\\
+Per cancellarne uno esistente:
+\\\\
+\textbf{git remote rm name}
+\\\\
+Ogni branch sulla nostra macchina può essere configurato per avere un upstream. In pratica il branch locale è la copia del branch di un repository remoto.
+Per settare ciò usare il comando:
+\\\\
+\textbf{git branch -u remoteName/remoteBranch}
+\\\\
+D'ora in poi il branch locale corrente fara' push e pull dal Branch remoteBranch.
+\\\\
+Nel caso il repository sia stato clonato e non inizializzato un riferimento al repository remoto di origine viene automaticamente inserito e configurato come upstream per tutti i branch col nome di origin.
+\\\\
+Al momento del clone Git scaricherà solo il branch primario.
+Per sapere quali sono tutti i branch in remoto usare il comando:
+\\\\
+\textbf{git branch -a}
+\\\\
+Qualora si voglia importare in locale un branch remoto per lavorarci occorre creare un "tracking branch" locale:
+\\\\
+\textbf{git checkout -b localBranchName remoteName/remoteBranchName}
+\\\\
+\centerline{es. git checkout -b miaLineaSvliuppo origin/developBranch}
+\section{Aggiornamento dei nuovi commit}
+Vogliamo sapere se su un certo branch ci sono dei nuovi commit fatti da altri utenti.
+Il sottocomando fetch ci permette di aggiornare le informazioni:
+\\\\
+\textbf{git fetch URI branchName}
+\\\\
+oppure
+\\\\
+\textbf{git fetch remoteName branchName}
+\\\\
+oppure qualora ci sia un branch upstream configurato
+\\\\
+\textbf{git fetch}
+\\\\
+Dopo aver fatto la fetch occorre fare la merge con "git merge" e rislovere gli eventuali conflitti
+Il sottocomando:
+\\\\
+\textbf{git pull}
+\\\\
+permette di fare fetch e merge in un colpo solo.
+Quindi perchè fare la fetch? Qualora si volesse vedere gli aggiornamenti di un branch senza effettuare poi il merge.
+
+La sintassi è la stessa del comando fetch.
+\\\\
+\textbf{git pull URI branchName}
+\\\\
+oppure
+\\\\
+\textbf{git pull remoteName branchName}
+\\\\
+oppure qualora ci sia un branch upstream configurato
+\\\\
+\textbf{git pull}
+\\\\
+\\\\Il comando speculare a pull è push. Permette di "spingere" i nuovi commit su un branch se non ci sono conflitti.
+
+La sintassi è la stessa del comando pull. La push va a buon fine solo se c'è corrispondenza tra tutti i commmit sul locale e sul remoto. 
+\\\\
+\textbf{git push URI branchName}
+\\\\
+oppure
+\\\\
+\textbf{git push remoteName branchName}
+\\\\
+oppure qualora ci sia un branch upstream configurato
+\\\\
+\textbf{git push}
+\\\\
 \end{document}

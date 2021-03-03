@@ -247,7 +247,10 @@ Qualora si voglia importare in locale un branch remoto per lavorarci occorre cre
 \centerline{es. git checkout -b miaLineaSviluppo origin/developBranch}
 \section{Aggiornamento dei nuovi commit}
 Vogliamo sapere se su un certo branch ci sono dei nuovi commit fatti da altri utenti.
-Il sottocomando fetch ci permette di aggiornare le informazioni:
+\begin{itemize}
+
+
+\item Il sottocomando fetch ci permette di aggiornare le informazioni:
 \\\\
 \textbf{git fetch URI branchName}
 \\\\
@@ -259,8 +262,9 @@ oppure qualora ci sia un branch upstream configurato
 \\\\
 \textbf{git fetch}
 \\\\
-Dopo aver fatto la fetch occorre fare la merge con "git merge" e rislovere gli eventuali conflitti
-Il sottocomando:
+Dopo aver fatto la fetch occorre fare la merge con "git merge" e risolvere gli eventuali conflitti.
+\\
+\item Il sottocomando:
 \\\\
 \textbf{git pull}
 \\\\
@@ -279,7 +283,8 @@ oppure qualora ci sia un branch upstream configurato
 \\\\
 \textbf{git pull}
 \\\\
-\\\\Il comando speculare a pull è push. Permette di "spingere" i nuovi commit su un branch se non ci sono conflitti.
+\\\\
+\item Il comando speculare a pull è push. Permette di "spingere" i nuovi commit su un branch se non ci sono conflitti.
 
 La sintassi è la stessa del comando pull. La push va a buon fine solo se c'è corrispondenza tra tutti i commmit sul locale e sul remoto. 
 \\\\
@@ -293,4 +298,5 @@ oppure qualora ci sia un branch upstream configurato
 \\\\
 \textbf{git push}
 \\\\
+\end{itemize}
 \end{document}
